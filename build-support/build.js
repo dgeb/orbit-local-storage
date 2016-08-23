@@ -21,6 +21,20 @@ module.exports = function build(pkg, namespace) {
   });
   var cjs = new CompileES6Modules(cjsSrc, { format: 'cjs' });
   cjs = new TranspileES6(cjs);
+  cjs = replace(cjs, {
+    files: ['**/*.js'],
+    pattern: {
+      match: /require\('orbit'/g,
+      replacement: "require('orbit-core'"
+    }
+  });
+  cjs = replace(cjs, {
+    files: ['**/*.js'],
+    pattern: {
+      match: /require\('orbit\//g,
+      replacement: "require('orbit-core/"
+    }
+  });
   var cjsDist = new Funnel(cjs, {
     srcDir: '/',
     destDir: 'cjs'
