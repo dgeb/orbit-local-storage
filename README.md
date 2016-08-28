@@ -1,6 +1,6 @@
 # OrbitLocalStorage [![Build Status](https://secure.travis-ci.org/orbitjs/orbit-local-storage.png?branch=master)](http://travis-ci.org/orbitjs/orbit-local-storage)
 
-OrbitLocalStorage is a data source for
+The OrbitLocalStorage library includes a data source for
 [Orbit.js](https://github.com/orbitjs/orbit-core)
 that accesses a browser's
 [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage).
