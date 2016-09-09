@@ -1,4 +1,3 @@
-/* eslint-disable valid-jsdoc */
 import Orbit from 'orbit';
 import Source from 'orbit/source';
 import Pullable from 'orbit/interfaces/pullable';
@@ -10,16 +9,21 @@ import { QueryOperators } from './lib/queries';
 import { supportsLocalStorage } from './lib/local-storage';
 
 /**
- Source for storing data in local storage
-
- @class LocalStorageSource
- @extends Source
- @namespace OC
- @param {Object}    [options]
- @param {OC.Schema} [options.schema] Schema for source (required)
- @constructor
+ * Source for storing data in localStorage.
+ *
+ * @class LocalStorageSource
+ * @extends Source
  */
 export default class LocalStorageSource extends Source {
+  /**
+   * Create a new LocalStorageSource.
+   *
+   * @constructor
+   * @param {Object} [options]           Options.
+   * @param {Schema} [options.schema]    Schema for source.
+   * @param {String} [options.namespace] Optional. Prefix for keys used in localStorage. Defaults to 'orbit'.
+   * @param {String} [options.delimiter] Optional. Delimiter used to separate key segments in localStorage. Defaults to '/'.
+   */
   constructor(options = {}) {
     assert('LocalStorageSource\'s `schema` must be specified in `options.schema` constructor argument', options.schema);
     assert('Your browser does not support local storage!', supportsLocalStorage());
@@ -28,8 +32,8 @@ export default class LocalStorageSource extends Source {
 
     super(options);
 
-    this.namespace = options['namespace'] || 'orbit'; // local storage namespace
-    this.delimiter = options['delimiter'] || '/'; // local storage key
+    this.namespace = options.namespace || 'orbit';
+    this.delimiter = options.delimiter || '/';
   }
 
   getKeyForRecord(record) {
