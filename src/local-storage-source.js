@@ -31,9 +31,10 @@ export default class LocalStorageSource extends Source {
     assert('LocalStorageSource\'s `schema` must be specified in `options.schema` constructor argument', options.schema);
     assert('Your browser does not support local storage!', supportsLocalStorage());
 
+    options.name = options.name || 'localStorage';
+
     super(options);
 
-    this.name      = options.name || 'localStorage';
     this.namespace = options['namespace'] || 'orbit'; // local storage namespace
     this.delimiter = options['delimiter'] || '/'; // local storage key
   }
