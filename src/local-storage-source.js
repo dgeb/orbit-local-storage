@@ -7,14 +7,7 @@ import Syncable from 'orbit/interfaces/syncable';
 import { assert } from 'orbit/lib/assert';
 import TransformOperators from './lib/transform-operators';
 import { QueryOperators } from './lib/queries';
-
-var supportsLocalStorage = function() {
-  try {
-    return 'localStorage' in self && self['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-};
+import { supportsLocalStorage } from './lib/local-storage';
 
 /**
  Source for storing data in local storage
