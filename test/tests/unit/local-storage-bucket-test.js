@@ -43,6 +43,6 @@ module('LocalStorageBucket', function(hooks) {
       .then(item => assert.deepEqual(item, planet, 'bucket contains item'))
       .then(() => bucket.removeItem('planet'))
       .then(() => bucket.getItem('planet'))
-      .then(item => assert.deepEqual(item, null, 'bucket does not contain item'));
+      .then(item => assert.equal(item, null, 'bucket does not contain item'));
   });
 });
