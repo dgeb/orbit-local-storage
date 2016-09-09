@@ -1,4 +1,3 @@
-/* eslint-disable valid-jsdoc */
 import Orbit from 'orbit';
 import Source from 'orbit/source';
 import Pullable from 'orbit/interfaces/pullable';
@@ -7,35 +6,34 @@ import Syncable from 'orbit/interfaces/syncable';
 import { assert } from 'orbit/lib/assert';
 import TransformOperators from './lib/transform-operators';
 import { QueryOperators } from './lib/queries';
-
-var supportsLocalStorage = function() {
-  try {
-    return 'localStorage' in self && self['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-};
+import { supportsLocalStorage } from './lib/local-storage';
 
 /**
- Source for storing data in local storage
-
- @class LocalStorageSource
- @extends Source
- @namespace OC
- @param {Object}    [options]
- @param {OC.Schema} [options.schema] Schema for source (required)
- @constructor
+ * Source for storing data in localStorage.
+ *
+ * @class LocalStorageSource
+ * @extends Source
  */
 export default class LocalStorageSource extends Source {
+  /**
+   * Create a new LocalStorageSource.
+   *
+   * @constructor
+   * @param {Object} [options]           Options.
+   * @param {Schema} [options.schema]    Schema for source.
+   * @param {String} [options.namespace] Optional. Prefix for keys used in localStorage. Defaults to 'orbit'.
+   * @param {String} [options.delimiter] Optional. Delimiter used to separate key segments in localStorage. Defaults to '/'.
+   */
   constructor(options = {}) {
     assert('LocalStorageSource\'s `schema` must be specified in `options.schema` constructor argument', options.schema);
     assert('Your browser does not support local storage!', supportsLocalStorage());
 
+    options.name = options.name || 'localStorage';
+
     super(options);
 
-    this.name      = options.name || 'localStorage';
-    this.namespace = options['namespace'] || 'orbit'; // local storage namespace
-    this.delimiter = options['delimiter'] || '/'; // local storage key
+    this.namespace = options.namespace || 'orbit';
+    this.delimiter = options.delimiter || '/';
   }
 
   getKeyForRecord(record) {
