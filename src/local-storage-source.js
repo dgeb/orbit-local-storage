@@ -19,21 +19,29 @@ export default class LocalStorageSource extends Source {
    * Create a new LocalStorageSource.
    *
    * @constructor
-   * @param {Object} [options]           Options.
-   * @param {Schema} [options.schema]    Schema for source.
-   * @param {String} [options.namespace] Optional. Prefix for keys used in localStorage. Defaults to 'orbit'.
-   * @param {String} [options.delimiter] Optional. Delimiter used to separate key segments in localStorage. Defaults to '/'.
+   * @param {Object} [settings]           Settings.
+   * @param {Schema} [settings.schema]    Schema for source.
+   * @param {String} [settings.namespace] Optional. Prefix for keys used in localStorage. Defaults to 'orbit'.
+   * @param {String} [settings.delimiter] Optional. Delimiter used to separate key segments in localStorage. Defaults to '/'.
    */
-  constructor(options = {}) {
-    assert('LocalStorageSource\'s `schema` must be specified in `options.schema` constructor argument', options.schema);
+  constructor(settings = {}) {
+    assert('LocalStorageSource\'s `schema` must be specified in `settings.schema` constructor argument', settings.schema);
     assert('Your browser does not support local storage!', supportsLocalStorage());
 
-    options.name = options.name || 'localStorage';
+    settings.name = settings.name || 'localStorage';
 
-    super(options);
+    super(settings);
 
-    this.namespace = options.namespace || 'orbit';
-    this.delimiter = options.delimiter || '/';
+    this._namespace = settings.namespace || 'orbit';
+    this._delimiter = settings.delimiter || '/';
+  }
+
+  get namespace() {
+    return this._namespace;
+  }
+
+  get delimiter() {
+    return this._delimiter;
   }
 
   getKeyForRecord(record) {
