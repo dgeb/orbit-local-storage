@@ -14,20 +14,24 @@ export default class LocalStorageBucket extends Bucket {
    * Create a new LocalStorageBucket.
    *
    * @constructor
-   * @param {Object} [options]           Options.
-   * @param {String} [options.name]      Optional. Name of this bucket. Defaults to 'localStorageBucket'.
-   * @param {String} [options.namespace] Optional. Prefix for keys used in localStorage. Defaults to 'orbit-bucket'.
-   * @param {String} [options.delimiter] Optional. Delimiter used to separate key segments in localStorage. Defaults to '/'.
+   * @param {Object}  [settings]           Settings.
+   * @param {String}  [settings.name]      Optional. Name of this bucket. Defaults to 'localStorageBucket'.
+   * @param {String}  [settings.namespace] Optional. Prefix for keys used in localStorage. Defaults to 'orbit-bucket'.
+   * @param {String}  [settings.delimiter] Optional. Delimiter used to separate key segments in localStorage. Defaults to '/'.
+   * @param {Integer} [settings.version]   Optional. Defaults to 1.
    */
-  constructor(options = {}) {
+  constructor(settings = {}) {
     assert('Your browser does not support local storage!', supportsLocalStorage());
 
-    options.name = options.name || 'localStorageBucket';
+    settings.name = settings.name || 'localStorageBucket';
 
-    super(options);
+    super(settings);
 
-    this.namespace = options.namespace || 'orbit-bucket';
-    this.delimiter = options.delimiter || '/';
+    this._delimiter = settings.delimiter || '/';
+  }
+
+  get delimiter() {
+    return this._delimiter;
   }
 
   getFullKeyForItem(key) {
