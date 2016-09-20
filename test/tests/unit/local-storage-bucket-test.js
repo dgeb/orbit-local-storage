@@ -19,7 +19,7 @@ module('LocalStorageBucket', function(hooks) {
   });
 
   test('is assigned a default name, namespace, and delimiter', function(assert) {
-    assert.equal(bucket.name, 'localStorageBucket', '`name` is `localStorageBucket` by default');
+    assert.equal(bucket.name, 'localStorage', '`name` is `localStorage` by default');
     assert.equal(bucket.namespace, 'orbit-bucket', '`namespace` is `orbit-bucket` by default');
     assert.equal(bucket.delimiter, '/', '`delimiter` is `/` by default');
   });

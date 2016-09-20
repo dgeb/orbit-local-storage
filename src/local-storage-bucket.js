@@ -23,7 +23,7 @@ export default class LocalStorageBucket extends Bucket {
   constructor(settings = {}) {
     assert('Your browser does not support local storage!', supportsLocalStorage());
 
-    settings.name = settings.name || 'localStorageBucket';
+    settings.name = settings.name || 'localStorage';
 
     super(settings);
 
